@@ -1,0 +1,9 @@
+if [ ! -f var/jwt/private.pem ]; then
+    echo Generating private key for JWT. Use the key as in jwt_passphrase.
+    openssl genrsa -out var/jwt/private.pem -aes256 4096
+fi
+
+if [ ! -f var/jwt/public.pem ]; then
+    echo Generating public key for JWT.
+    openssl rsa -pubout -in var/jwt/private.pem -out var/jwt/public.pem
+fi

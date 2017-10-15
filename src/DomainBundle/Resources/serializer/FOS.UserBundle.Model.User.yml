@@ -1,0 +1,30 @@
+FOS\UserBundle\Model\User:
+    properties:
+        id:
+            exclude: true
+        credentialsExpired:
+            exclude: true
+        usernameCanonical:
+            exclude: true
+        emailCanonical:
+            exclude: true
+        password:
+            exclude: true
+        enabled:
+            exclude: true
+        expired:
+            exclude: true
+        locked:
+            exclude: true
+        salt:
+            exclude: true
+        groups:
+            exclude: true
+        plainPassword:
+            exclude: true
+        email:
+            groups: ['ddr.rest.get']
+        lastLogin:
+            groups: ['ddr.rest.get']
+        roles:
+            groups: ['ddr.rest.get']

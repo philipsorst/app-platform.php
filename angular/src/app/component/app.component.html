@@ -1,0 +1,17 @@
+<div id=wrapper>
+    <mat-toolbar color="primary" id="main-toolbar">
+        <button mat-icon-button (click)="sidenav.toggle()">
+            <mat-icon class="mat-24">menu</mat-icon>
+        </button>
+    </mat-toolbar>
+
+    <mat-sidenav-container>
+        <mat-sidenav #sidenav fixedInViewport="true">
+            <mat-nav-list>
+            </mat-nav-list>
+        </mat-sidenav>
+        <div>
+            <router-outlet></router-outlet>
+        </div>
+    </mat-sidenav-container>
+</div>
