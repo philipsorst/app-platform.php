@@ -50,9 +50,9 @@ class UrlService
     protected function getEnvPrefix(string $env): string
     {
         if ('prod' === $env) {
-            return '/';
-        } else {
-            return '/' . $env . '.php';
+            return '';
         }
+
+        return '/' . $env . '.php';
     }
 }
