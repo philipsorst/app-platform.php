@@ -24,8 +24,10 @@
 /var/data/*
 !var/data/.gitkeep
 
+/angular/node_modules/
+/angular/src/environments/api-config.ts
+
 !var/SymfonyRequirements.php
 /vendor/
 /web/bundles/
-/angular/node_modules/
 /web/app/

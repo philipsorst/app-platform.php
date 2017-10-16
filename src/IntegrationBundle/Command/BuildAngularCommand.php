@@ -24,9 +24,12 @@ class BuildAngularCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $urlService = $this->getContainer()->get('app_platform.service.url');
+        $environment = $this->getContainer()->get('kernel')->getEnvironment();
+        $angularDir = realpath($this->getContainer()->get('kernel')->getRootDir() . '/../angular/');
+
         $prod = $input->getOption('force-prod');
         if (false === $prod) {
-            $environment = $this->getContainer()->get('kernel')->getEnvironment();
             $prod = $prod || 'prod' === $environment;
         }
 
@@ -53,15 +56,25 @@ class BuildAngularCommand extends ContainerAwareCommand
             }
         }
 
+        $output->writeln('Configuring API endpoint');
+        $twig = $this->getContainer()->get('twig');
+        $apiConfigTs = $twig->render(
+            'IntegrationBundle:Angular:api-config.twig.ts',
+            [
+                'baseUrl' => $urlService->getApiBaseUrl($environment)
+            ]
+        );
+        file_put_contents($angularDir . '/src/environments/api-config.ts', $apiConfigTs);
+
         $output->writeln('Building Angular');
         $angularBuildCommandLine = 'ng build';
-        $baseHref = $this->getContainer()->get('app_platform.service.url')->getAngularBaseHref();
+        $baseHref = $urlService->getAngularBaseHref();
         $angularBuildCommandLine .= ' -bh ' . $baseHref;
         if ($prod) {
             $angularBuildCommandLine .= ' -prod -aot';
         }
         $angularBuildProcess = new Process($angularBuildCommandLine);
-        $angularBuildProcess->setWorkingDirectory($this->getContainer()->get('kernel')->getRootDir() . '/../angular/');
+        $angularBuildProcess->setWorkingDirectory($angularDir);
         try {
 //            $angularBuildProcess->mustRun(
 //                function ($type, $buffer) {

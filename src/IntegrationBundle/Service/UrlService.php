@@ -2,6 +2,8 @@
 
 namespace IntegrationBundle\Service;
 
+use Symfony\Bundle\FrameworkBundle\Routing\Router;
+
 /**
  * @author Philip Washington Sorst <philip@sorst.net>
  */
@@ -12,12 +14,15 @@ class UrlService
      */
     private $baseUrl;
 
-    public function __construct(string $baseUrl)
+    /**
+     * @var Router
+     */
+    private $router;
+
+    public function __construct(string $baseUrl, Router $router)
     {
-        $this->baseUrl = $baseUrl;
-        if (substr($this->baseUrl, -1) !== '/') {
-            $this->baseUrl .= '/';
-        }
+        $this->baseUrl = rtrim($baseUrl, "/");
+        $this->router = $router;
     }
 
     /**
@@ -30,6 +35,24 @@ class UrlService
 
     public function getAngularBaseHref(): string
     {
-        return $this->baseUrl . 'app/';
+        return $this->baseUrl . '/app/';
+    }
+
+    public function getApiBaseUrl(string $env = 'prod'): string
+    {
+        return $this->baseUrl . $this->getEnvPrefix($env) . $this->router->generate(
+                'domain_index',
+                [],
+                Router::ABSOLUTE_PATH
+            );
+    }
+
+    protected function getEnvPrefix(string $env): string
+    {
+        if ('prod' === $env) {
+            return '/';
+        } else {
+            return '/' . $env . '.php';
+        }
     }
 }
