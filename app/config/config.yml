@@ -81,3 +81,7 @@ lexik_jwt_authentication:
 ddr_rest:
     paths:
         - '/api'
+    metadata:
+        directories:
+            generic:
+                path: '%kernel.root_dir%/../src/DomainBundle/Resources/metadata'

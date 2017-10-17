@@ -1,0 +1,22 @@
+FOS\UserBundle\Model\User:
+    fields:
+        confirmationToken:
+            excluded: true
+        groups:
+            excluded: true
+        emailCanonical:
+            excluded: true
+        lastLogin:
+            excluded: true
+        password:
+            excluded: true
+        salt:
+            excluded: true
+        enabled:
+            excluded: true
+        plainPassword:
+            excluded: true
+        passwordRequestedAt:
+            excluded: true
+        usernameCanonical:
+            excluded: true

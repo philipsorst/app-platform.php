@@ -55,11 +55,13 @@
         "post-install-cmd": [
             "@symfony-scripts",
             "bin/generate-keys",
+            "bin/set-permissions",
             "bin/console app-platform:build-angular"
         ],
         "post-update-cmd": [
             "@symfony-scripts",
             "bin/generate-keys",
+            "bin/set-permissions",
             "bin/console app-platform:build-angular"
         ]
     },
