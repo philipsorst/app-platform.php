@@ -3,6 +3,9 @@ integration:
     type:     annotation
     prefix:   /
 
+api_login_check:
+    path: /api/login_check
+
 domain:
     resource: "@DomainBundle/Resources/config/routing.yml"
     prefix:   /api

@@ -1,6 +1,6 @@
 import {apiConfig} from "../../environments/api-config";
-import {CollectionResult} from "../../model/collection-result";
-import {Pagination} from "../../model/pagination";
+import {CollectionResult} from "../model/collection-result";
+import {Pagination} from "../model/pagination";
 
 export function RestangularConfigFactory(RestangularProvider) {
 

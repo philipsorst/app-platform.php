@@ -2,12 +2,18 @@
 
 namespace DomainBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
 use Dontdrinkandroot\RestBundle\Metadata\Annotation as REST;
 use FOS\UserBundle\Model\User as BaseUser;
-use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @REST\RootResource()
+ * @REST\RootResource(
+ *     controller="DomainBundle\Controller\UserController",
+ *     methods= {
+ *         @REST\Method(name="LIST", right=@REST\Right({"ROLE_ADMIN"})),
+ *         @REST\Method(name="GET"),
+ *     }
+ * )
  * @ORM\Entity(repositoryClass="Dontdrinkandroot\Service\DoctrineCrudService")
  *
  * @author Philip Washington Sorst <philip@sorst.net>

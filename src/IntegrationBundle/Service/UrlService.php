@@ -53,6 +53,6 @@ class UrlService
             return '';
         }
 
-        return '/' . $env . '.php';
+        return '/app_' . $env . '.php';
     }
 }

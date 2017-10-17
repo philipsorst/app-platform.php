@@ -19,7 +19,8 @@ class BuildAngularCommand extends ContainerAwareCommand
         $this
             ->setName('app-platform:build-angular')
             ->addOption('force-prod', null, InputOption::VALUE_NONE)
-            ->addOption('skip-npm', null, InputOption::VALUE_NONE);
+            ->addOption('skip-npm', null, InputOption::VALUE_NONE)
+            ->addOption('skip-angular', null, InputOption::VALUE_NONE);
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -66,16 +67,17 @@ class BuildAngularCommand extends ContainerAwareCommand
         );
         file_put_contents($angularDir . '/src/environments/api-config.ts', $apiConfigTs);
 
-        $output->writeln('Building Angular');
-        $angularBuildCommandLine = 'ng build';
-        $baseHref = $urlService->getAngularBaseHref();
-        $angularBuildCommandLine .= ' -bh ' . $baseHref;
-        if ($prod) {
-            $angularBuildCommandLine .= ' -prod -aot';
-        }
-        $angularBuildProcess = new Process($angularBuildCommandLine);
-        $angularBuildProcess->setWorkingDirectory($angularDir);
-        try {
+        if (!$input->getOption('skip-angular')) {
+            $output->writeln('Building Angular');
+            $angularBuildCommandLine = 'ng build';
+            $baseHref = $urlService->getAngularBaseHref();
+            $angularBuildCommandLine .= ' -bh ' . $baseHref;
+            if ($prod) {
+                $angularBuildCommandLine .= ' -prod -aot';
+            }
+            $angularBuildProcess = new Process($angularBuildCommandLine);
+            $angularBuildProcess->setWorkingDirectory($angularDir);
+            try {
 //            $angularBuildProcess->mustRun(
 //                function ($type, $buffer) {
 //                    if (Process::ERR === $type) {
@@ -85,12 +87,13 @@ class BuildAngularCommand extends ContainerAwareCommand
 //                    }
 //                }
 //            );
-            $output->writeln('Executing: ' . $angularBuildProcess->getCommandLine());
-            $angularBuildProcess->mustRun();
-        } catch (ProcessFailedException $e) {
-            $output->writeln($e->getMessage());
+                $output->writeln('Executing: ' . $angularBuildProcess->getCommandLine());
+                $angularBuildProcess->mustRun();
+            } catch (ProcessFailedException $e) {
+                $output->writeln($e->getMessage());
 
-            return -1;
+                return -1;
+            }
         }
 
         return 0;
