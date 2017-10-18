@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {APP_INITIALIZER, NgModule} from '@angular/core';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from "../component/app.component";
@@ -20,6 +20,11 @@ import {LoginComponent} from "../component/login.component";
 import {UserService} from "../service/user.service";
 import {FormsModule} from "@angular/forms";
 import {LoggedinAuthGuardService} from "../service/auth/loggedin-auth-guard.service";
+import {InitService} from "../service/init.service";
+
+export function initServiceFactory(initService: InitService): Function {
+    return () => initService.initialize();
+}
 
 @NgModule({
     declarations: [
@@ -43,7 +48,14 @@ import {LoggedinAuthGuardService} from "../service/auth/loggedin-auth-guard.serv
     ],
     providers: [
         UserService,
-        LoggedinAuthGuardService
+        LoggedinAuthGuardService,
+        InitService,
+        {
+            provide: APP_INITIALIZER,
+            useFactory: initServiceFactory,
+            deps: [InitService],
+            multi: true
+        }
     ],
     bootstrap: [AppComponent]
 })

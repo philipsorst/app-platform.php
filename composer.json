@@ -36,7 +36,7 @@
         "symfony/symfony": "3.3.*",
         "twig/twig": "^2.0",
         "friendsofsymfony/user-bundle": "^2.0",
-        "dontdrinkandroot/rest-bundle": "0.2.x-dev",
+        "dontdrinkandroot/rest-bundle": "dev-standalone",
         "lexik/jwt-authentication-bundle": "^2.4"
     },
     "require-dev": {

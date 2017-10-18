@@ -9,7 +9,44 @@
 </head>
 <body>
 <app-root>
-    Loading
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        app-root {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #3f51b5;
+            color: white;
+            z-index: 2;
+        }
+
+        app-root .app-loader-content {
+            text-align: center;
+            width: 200px;
+            animation: pulse 1s linear infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.25);
+            }
+            100% {
+                transform: scale(1);
+            }
+
+        }
+    </style>
+    <div class="app-loader-content">
+        Loading
+    </div>
 </app-root>
 </body>
 </html>
