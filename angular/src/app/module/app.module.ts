@@ -12,6 +12,7 @@ import {
     MatInputModule,
     MatListModule,
     MatSidenavModule,
+    MatSnackBarModule,
     MatToolbarModule
 } from "@angular/material";
 import {RestangularConfigFactory} from "../service/restangular.factory";
@@ -44,7 +45,8 @@ export function initServiceFactory(initService: InitService): Function {
         MatButtonModule,
         MatListModule,
         MatFormFieldModule,
-        MatInputModule
+        MatInputModule,
+        MatSnackBarModule
     ],
     providers: [
         UserService,
