@@ -76,6 +76,7 @@ class BuildAngularCommand extends ContainerAwareCommand
                 $angularBuildCommandLine .= ' -prod -aot';
             }
             $angularBuildProcess = new Process($angularBuildCommandLine);
+            $angularBuildProcess->setTimeout(300);
             $angularBuildProcess->setWorkingDirectory($angularDir);
             try {
 //            $angularBuildProcess->mustRun(
