@@ -12,3 +12,8 @@ domain:
 
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+api:
+    resource: '@DomainBundle/Entity/'
+    type:     'api_platform'
+    prefix:   '/api'

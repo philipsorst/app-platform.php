@@ -20,7 +20,7 @@ framework:
     form: ~
     csrf_protection: ~
     validation: { enable_annotations: true }
-    #serializer: { enable_annotations: true }
+    serializer: { enable_annotations: true }
     templating:
         engines: ['twig']
     default_locale: '%locale%'
@@ -80,10 +80,5 @@ lexik_jwt_authentication:
     private_key_path: '%kernel.root_dir%/../var/jwt/private.pem'
     public_key_path:  '%kernel.root_dir%/../var/jwt/public.pem'
 
-ddr_rest:
-    paths:
-        - '/api'
-    metadata:
-        directories:
-            generic:
-                path: '%kernel.root_dir%/../src/DomainBundle/Resources/metadata'
+api_platform:
+    enable_fos_user: true

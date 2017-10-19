@@ -13,3 +13,12 @@ services:
         # this means you cannot fetch services directly from the container via $container->get()
         # if you need to do this, you can override this setting on individual services
         public: false
+
+    DomainBundle\:
+        resource: '../../src/DomainBundle/*'
+        exclude: '../../src/DomainBundle/{Entity,Repository}'
+
+    DomainBundle\Action\:
+        resource: '../../src/DomainBundle/Action'
+        public: true
+        tags: ['controller.service_arguments']

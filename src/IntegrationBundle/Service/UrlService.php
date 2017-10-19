@@ -41,7 +41,7 @@ class UrlService
     public function getApiBaseUrl(string $env = 'prod'): string
     {
         return $this->baseUrl . $this->getEnvPrefix($env) . $this->router->generate(
-                'domain_index',
+                'api_entrypoint',
                 [],
                 Router::ABSOLUTE_PATH
             );

@@ -1,1 +1,7 @@
-composer install
+(
+    export SYMFONY_ENV=dev && \
+    bin/set-permissions && \
+    bin/generate-keys && \
+    composer install && \
+    bin/console app-platform:build-angular
+)

@@ -2,17 +2,26 @@
 
 namespace DomainBundle\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
-use Dontdrinkandroot\RestBundle\Metadata\Annotation as REST;
 use FOS\UserBundle\Model\User as BaseUser;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @REST\RootResource(
- *     controller="DomainBundle:User",
- *     methods="{'GET', 'LIST'}",
- *     listRight=@REST\Right(expression="has_role('ROLE_ADMIN')")
+ * @ApiResource(
+ *     attributes={
+ *         "normalization_context"={"groups"={"user", "user-read"}},
+ *         "denormalization_context"={"groups"={"user", "user-write"}}
+ *     },
+ *     collectionOperations={
+ *         "get"={"method"="GET", "access_control"="is_granted('ROLE_ADMIN')"}
+ *     },
+ *     itemOperations={
+ *         "get"={"method"="GET", "access_control"="is_granted('ROLE_ADMIN') or object == user"}
+ *     }
  * )
- * @ORM\Entity(repositoryClass="Dontdrinkandroot\Service\DoctrineCrudService")
+ * @ORM\Entity
  *
  * @author Philip Washington Sorst <philip@sorst.net>
  */
@@ -24,4 +33,24 @@ class User extends BaseUser
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+
+    /**
+     * @Groups({"user"})
+     */
+    protected $email;
+
+    /**
+     * @Groups({"user-write"})
+     */
+    protected $plainPassword;
+
+    /**
+     * @Groups({"user"})
+     */
+    protected $username;
+
+    public function isUser(UserInterface $user = null)
+    {
+        return $user instanceof self && $user->id === $this->id;
+    }
 }

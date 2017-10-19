@@ -36,8 +36,8 @@
         "symfony/symfony": "3.3.*",
         "twig/twig": "^2.0",
         "friendsofsymfony/user-bundle": "^2.0",
-        "dontdrinkandroot/rest-bundle": "dev-standalone",
-        "lexik/jwt-authentication-bundle": "^2.4"
+        "lexik/jwt-authentication-bundle": "^2.4",
+        "api-platform/core": "^2.1"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
@@ -53,16 +53,10 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
         ],
         "post-install-cmd": [
-            "@symfony-scripts",
-            "bin/generate-keys",
-            "bin/set-permissions",
-            "bin/console app-platform:build-angular"
+            "@symfony-scripts"
         ],
         "post-update-cmd": [
-            "@symfony-scripts",
-            "bin/generate-keys",
-            "bin/set-permissions",
-            "bin/console app-platform:build-angular"
+            "@symfony-scripts"
         ]
     },
     "extra": {

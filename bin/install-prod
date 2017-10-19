@@ -1,1 +1,7 @@
-(export SYMFONY_ENV=prod && composer install --no-dev --optimize-autoloader)
+(
+    export SYMFONY_ENV=prod && \
+    bin/set-permissions && \
+    bin/generate-keys && \
+    composer install --no-dev --optimize-autoloader && \
+    bin/console app-platform:build-angular
+)

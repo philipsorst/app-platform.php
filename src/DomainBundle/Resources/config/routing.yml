@@ -1,9 +1,0 @@
-domain_index:
-    path: ''
-    defaults:
-        _format: json
-        _controller: 'DomainBundle:Index:index'
-
-domain_entities:
-    resource: "@DomainBundle/Entity/"
-    type: ddr_rest
