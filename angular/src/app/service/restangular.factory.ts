@@ -1,28 +1,55 @@
 import {apiConfig} from "../../environments/api-config";
 import {CollectionResult} from "../model/collection-result";
-import {Pagination} from "../model/pagination";
+import {UrlInfo} from "../model/url-info";
+import {PartialCollectionView} from "../model/partial-collection-view";
 
 export function RestangularConfigFactory(RestangularProvider) {
 
+    let baseUrl = UrlInfo.parse(apiConfig.baseUrl);
+
+    /**
+     * Make URL absolute, so Restangular can handle it properly.
+     */
+    function absolutizeUrl(url: string): string | null {
+        if (null == url) {
+            return url;
+        }
+
+        return baseUrl.getRoot() + url;
+    }
+
     RestangularProvider.setBaseUrl(apiConfig.baseUrl);
-    RestangularProvider.setRestangularFields({
-        selfLink: '_links.self.href'
-    });
+    RestangularProvider.setSelfLinkAbsoluteUrl(true);
 
-    RestangularProvider.addResponseInterceptor((data, operation, what, url, response: Response) => {
-        if ('getList' === operation) {
-            let collectionResult: CollectionResult<any> = new CollectionResult();
-            for (let datum of data) {
-                collectionResult.push(datum);
+    /* Hydra collections support */
+    RestangularProvider.addResponseInterceptor(function (data, operation) {
+
+        /* Rewrite the href so restangular can handle it */
+        function setHref(data) {
+            if (null != data && data['@id']) {
+                data['href'] = absolutizeUrl(data['@id']);
             }
+        }
 
-            if (response.headers.has('x-pagination-current-page')) {
-                let pagination = new Pagination();
-                pagination.currentPage = +response.headers.get('x-pagination-current-page');
-                pagination.perPage = +response.headers.get('x-pagination-per-page');
-                pagination.total = +response.headers.get('x-pagination-total');
-                pagination.totalPages = +response.headers.get('x-pagination-total-pages');
-                collectionResult.pagination = pagination;
+        /* Populate href property for the collection */
+        setHref(data);
+
+        if ('getList' === operation) {
+
+            let collectionResult = new CollectionResult();
+            for (let result of data['hydra:member']) {
+                setHref(result);
+                collectionResult.push(result);
+            }
+            collectionResult.totalItems = data['hydra:totalItems'];
+            if (data.hasOwnProperty('hydra:view')) {
+                let viewData = data['hydra:view'];
+                let partialCollectionView = new PartialCollectionView();
+                partialCollectionView.first = absolutizeUrl(viewData['hydra:first']);
+                partialCollectionView.next = absolutizeUrl(viewData['hydra:next']);
+                partialCollectionView.previous = absolutizeUrl(viewData['hydra:previous']);
+                partialCollectionView.last = absolutizeUrl(viewData['hydra:last']);
+                collectionResult.partialCollectionView = partialCollectionView;
             }
 
             return collectionResult;

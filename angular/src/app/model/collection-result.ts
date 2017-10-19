@@ -1,5 +1,8 @@
-import {Pagination} from "./pagination";
+import {PartialCollectionView} from "./partial-collection-view";
 
 export class CollectionResult<T> extends Array<T> {
-    pagination: Pagination;
+
+    public totalItems: number;
+
+    public partialCollectionView: PartialCollectionView;
 }

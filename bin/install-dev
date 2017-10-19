@@ -3,5 +3,6 @@
     bin/set-permissions && \
     bin/generate-keys && \
     composer install && \
+    bin/generate-icons && \
     bin/console app-platform:build-angular
 )

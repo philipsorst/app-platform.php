@@ -18,7 +18,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *         "get"={"method"="GET", "access_control"="is_granted('ROLE_ADMIN')"}
  *     },
  *     itemOperations={
- *         "get"={"method"="GET", "access_control"="is_granted('ROLE_ADMIN') or object == user"}
+ *         "get"={"method"="GET", "access_control"="is_granted('ROLE_ADMIN') or object.getId() == user.getId()"}
  *     }
  * )
  * @ORM\Entity
