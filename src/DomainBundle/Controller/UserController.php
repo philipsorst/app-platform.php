@@ -4,9 +4,10 @@ namespace DomainBundle\Controller;
 
 use DomainBundle\Entity\User;
 use Dontdrinkandroot\RestBundle\Controller\ContainerAwareRestResourceController;
+use Dontdrinkandroot\RestBundle\Controller\RestResourceController;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
-class UserController extends ContainerAwareRestResourceController
+class UserController extends RestResourceController
 {
     /**
      * {@inheritdoc}

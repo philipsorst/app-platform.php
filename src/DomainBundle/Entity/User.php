@@ -8,11 +8,9 @@ use FOS\UserBundle\Model\User as BaseUser;
 
 /**
  * @REST\RootResource(
- *     controller="DomainBundle\Controller\UserController",
- *     methods= {
- *         @REST\Method(name="LIST", right=@REST\Right({"ROLE_ADMIN"})),
- *         @REST\Method(name="GET"),
- *     }
+ *     controller="DomainBundle:User",
+ *     methods="{'GET', 'LIST'}",
+ *     listRight=@REST\Right(expression="has_role('ROLE_ADMIN')")
  * )
  * @ORM\Entity(repositoryClass="Dontdrinkandroot\Service\DoctrineCrudService")
  *
