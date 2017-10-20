@@ -28,7 +28,12 @@ class UserListCommand extends ContainerAwareCommand
         $table->setHeaders(['username', 'email', 'roles', 'active']);
         foreach ($users as $user) {
             $table->addRow(
-                [$user->getUsername(), $user->getEmail(), implode(',', $user->getRoles()), $user->isEnabled() ?? 'x']
+                [
+                    $user->getUsername(),
+                    $user->getEmail(),
+                    implode(',', $user->getRoles()),
+                    $user->isEnabled() ? 'x' : ''
+                ]
             );
         }
         $table->render();

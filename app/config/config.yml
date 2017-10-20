@@ -74,6 +74,9 @@ fos_user:
     from_email:
         address: '%mailer_address%'
         sender_name: '%mailer_sender%'
+    registration:
+        confirmation:
+            enabled: true
 
 lexik_jwt_authentication:
     pass_phrase:      '%jwt_passphrase%'
