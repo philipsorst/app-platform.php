@@ -22,7 +22,7 @@ export function RestangularConfigFactory(RestangularProvider) {
     RestangularProvider.setSelfLinkAbsoluteUrl(true);
 
     /* Hydra collections support */
-    RestangularProvider.addResponseInterceptor(function (data, operation) {
+    RestangularProvider.addResponseInterceptor((data, operation) => {
 
         /* Rewrite the href so restangular can handle it */
         function setHref(data) {

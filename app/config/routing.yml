@@ -1,10 +1,14 @@
+gesdinet_jwt_refresh_token:
+    path:     /api/token/refresh
+    defaults: { _controller: gesdinet.jwtrefreshtoken:refresh }
+
+api_login_check:
+    path: /api/login_check
+
 integration:
     resource: "@IntegrationBundle/Controller/"
     type:     annotation
     prefix:   /
-
-api_login_check:
-    path: /api/login_check
 
 domain:
     resource: "@DomainBundle/Resources/config/routing.yml"

@@ -7,13 +7,14 @@ import {UserComponent} from "../component/user.component";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {
     MatButtonModule,
+    MatCardModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
     MatListModule,
     MatSidenavModule,
     MatSnackBarModule,
-    MatToolbarModule
+    MatToolbarModule,
 } from "@angular/material";
 import {RestangularConfigFactory} from "../service/restangular.factory";
 import {RestangularModule} from "ngx-restangular";
@@ -22,6 +23,7 @@ import {UserService} from "../service/user.service";
 import {FormsModule} from "@angular/forms";
 import {LoggedinAuthGuardService} from "../service/auth/loggedin-auth-guard.service";
 import {InitService} from "../service/init.service";
+import {JwtService} from "../service/auth/jwt.service";
 
 export function initServiceFactory(initService: InitService): Function {
     return () => initService.initialize();
@@ -46,11 +48,13 @@ export function initServiceFactory(initService: InitService): Function {
         MatListModule,
         MatFormFieldModule,
         MatInputModule,
-        MatSnackBarModule
+        MatSnackBarModule,
+        MatCardModule
     ],
     providers: [
         UserService,
         LoggedinAuthGuardService,
+        JwtService,
         InitService,
         {
             provide: APP_INITIALIZER,

@@ -79,6 +79,12 @@ lexik_jwt_authentication:
     pass_phrase:      '%jwt_passphrase%'
     private_key_path: '%kernel.root_dir%/../var/jwt/private.pem'
     public_key_path:  '%kernel.root_dir%/../var/jwt/public.pem'
+    token_ttl:        30
+
+gesdinet_jwt_refresh_token:
+    user_provider: fos_user.user_provider.username_email
+    firewall: refresh
+    ttl_update: true
 
 api_platform:
     enable_fos_user: true
