@@ -57,8 +57,9 @@ class BuildAngularCommand extends ContainerAwareCommand
             }
         }
 
-        $output->writeln('Configuring API endpoint');
         $twig = $this->getContainer()->get('twig');
+
+        $output->writeln('Configuring API endpoint');
         $apiConfigTs = $twig->render(
             'IntegrationBundle:Angular:api-config.twig.ts',
             [
@@ -66,6 +67,19 @@ class BuildAngularCommand extends ContainerAwareCommand
             ]
         );
         file_put_contents($angularDir . '/src/environments/api-config.ts', $apiConfigTs);
+
+        $output->writeln('Writing Manifest');
+        $manifestContent = $twig->render(
+            'IntegrationBundle:Angular:manifest.twig.json',
+            [
+                'startUrl'        => $urlService->getAngularBaseHref(),
+                'name'            => $this->getContainer()->getParameter('display_name'),
+                'shortName'       => $this->getContainer()->getParameter('display_name'),
+                'themeColor'      => $this->getContainer()->getParameter('theme_color'),
+                'backgroundColor' => $this->getContainer()->getParameter('theme_color'),
+            ]
+        );
+        file_put_contents($angularDir . '/src/manifest.json', $manifestContent);
 
         if (!$input->getOption('skip-angular')) {
             $output->writeln('Building Angular');

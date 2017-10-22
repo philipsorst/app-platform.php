@@ -22,5 +22,7 @@ parameters:
     secret: ThisTokenIsNotSoSecretChangeIt
 
     base_url: http://localhost/
+    display_name: ~
+    theme_color: '#3f51b5'
 
     jwt_passphrase: ''
