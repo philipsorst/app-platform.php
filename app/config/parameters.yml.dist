@@ -21,6 +21,8 @@ parameters:
     # A secret key that's used to generate certain security-related tokens
     secret: ThisTokenIsNotSoSecretChangeIt
 
+    locale: en
+
     base_url: http://localhost/
     display_name: ~
     theme_color: '#3f51b5'
