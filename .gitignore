@@ -28,6 +28,7 @@
 /angular/src/environments/api-config.ts
 /angular/src/assets/icons/icon*
 /angular/src/manifest.json
+/angular/src/index.html
 
 !var/SymfonyRequirements.php
 /vendor/
