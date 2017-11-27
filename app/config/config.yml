@@ -90,3 +90,8 @@ gesdinet_jwt_refresh_token:
 
 api_platform:
     enable_fos_user: true
+
+ddr_angular_integration:
+    base_href: '%base_href%'
+    name: '%display_name%'
+    short_name: '%display_name%'
