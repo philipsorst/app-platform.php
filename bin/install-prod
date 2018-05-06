@@ -1,8 +1,0 @@
-(
-    export SYMFONY_ENV=prod && \
-    bin/set-permissions && \
-    bin/generate-keys && \
-    composer install --no-dev --optimize-autoloader && \
-    bin/generate-icons && \
-    bin/console app-platform:build-angular
-)

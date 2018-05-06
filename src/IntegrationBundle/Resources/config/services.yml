@@ -1,7 +1,0 @@
-services:
-
-    app_platform.service.url:
-        class: IntegrationBundle\Service\UrlService
-        arguments:
-            - 'http://localhost:8000'
-            - '@router'

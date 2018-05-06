@@ -1,0 +1,4 @@
+gesdinet_jwt_refresh_token:
+    user_provider: fos_user.user_provider.username_email
+    firewall: refresh
+    ttl_update: true

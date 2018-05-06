@@ -1,0 +1,9 @@
+App\Entity\User:
+    attributes:
+        username:
+            groups: ['list.user', 'get.user']
+        roles:
+            groups:
+                - 'get.user'
+        memberships:
+            groups: ['get.user']

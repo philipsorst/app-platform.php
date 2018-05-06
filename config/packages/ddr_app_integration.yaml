@@ -1,0 +1,4 @@
+ddr_app_integration:
+    name: '%env(APP_NAME)%'
+    short_name: '%env(APP_NAME)%'
+    base_href: '%env(BASE_HREF)%'

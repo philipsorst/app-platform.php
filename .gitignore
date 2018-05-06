@@ -1,36 +1,25 @@
-/.web-server-pid
-/app/config/parameters.yml
-/build/
-/phpunit.xml
-/var/*
-
-!/var/cache
-/var/cache/*
-!var/cache/.gitkeep
-
-!/var/logs
-/var/logs/*
-!var/logs/.gitkeep
-
-!/var/sessions
-/var/sessions/*
-!var/sessions/.gitkeep
-
-!/var/jwt
-/var/jwt/*
-!var/jwt/.gitkeep
-
-!/var/data
-/var/data/*
-!var/data/.gitkeep
-
-/angular/node_modules/
-/angular/src/environments/api-config.ts
-/angular/src/assets/icons/icon*
-/angular/src/manifest.json
-/angular/src/index.html
-
-!var/SymfonyRequirements.php
+###> symfony/framework-bundle ###
+/.env
+/public/bundles/
+/var/
 /vendor/
-/web/bundles/
-/web/app/
+###< symfony/framework-bundle ###
+
+###> lexik/jwt-authentication-bundle ###
+/config/jwt/*.pem
+###< lexik/jwt-authentication-bundle ###
+
+###> symfony/web-server-bundle ###
+/.web-server-pid
+###< symfony/web-server-bundle ###
+
+/.idea/
+
+/angular/src/index.html
+/angular/src/assets/icons/*.png
+/angular/src/environments/api-config.ts
+/angular/node_modules/*
+/angular/src/manifest.json
+/angular/yarn-error.log
+
+/public/app/

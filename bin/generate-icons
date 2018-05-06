@@ -1,8 +1,0 @@
-#!/bin/sh
-convert -background none angular/src/assets/icons/template.svg -resize 16x16 angular/src/assets/icons/icon_16.png
-convert -background none angular/src/assets/icons/template.svg -resize 32x32 angular/src/assets/icons/icon_32.png
-convert -background none angular/src/assets/icons/template.svg -resize 48x48 angular/src/assets/icons/icon_48.png
-convert -background none angular/src/assets/icons/template.svg -resize 96x96 angular/src/assets/icons/icon_96.png
-convert -background none angular/src/assets/icons/template.svg -resize 144x144 angular/src/assets/icons/icon_144.png
-convert -background none angular/src/assets/icons/template.svg -resize 180x180 angular/src/assets/icons/icon_180.png
-convert -background none angular/src/assets/icons/template.svg -resize 192x192 angular/src/assets/icons/icon_192.png
